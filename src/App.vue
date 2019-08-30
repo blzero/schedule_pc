@@ -8,7 +8,7 @@
                 </el-aside>
                 <el-container>
                     <el-main>
-                        <router-view></router-view>
+                        <transition-view></transition-view>
                     </el-main>
                 </el-container>
             </el-container>
@@ -20,23 +20,31 @@
 import zHeader from "./layout/header";
 import siderBar from "./layout/siderbar";
 
-import UserInfo from '@/service/userInfo.js'
-
+import { mapActions } from 'vuex'
 export default {
     name: "app",
+    data() {
+        return {
+            userTimer: null,
+        }
+    },
     mounted() {
-      UserInfo.getUserInfo().then(res => {
-        console.log(res);
-      });
+        this.getUserInfo();
+        this.userTimer = setInterval(() => {
+           this.getUserInfo(); 
+        }, 1000 * 60 * 15);
     },
     components: {
         zHeader,
         siderBar
+    },
+    methods: {
+        ...mapActions(['getUserInfo'])
     }
 };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 #app {
     height: 100vh;
     overflow: auto;
@@ -51,5 +59,6 @@ export default {
         flex: 1;
         overflow: auto;
     }
+    
 }
 </style>

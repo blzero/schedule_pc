@@ -1,6 +1,7 @@
 module.exports = {
     devServer: {
         host: 'schedule.dev.51eparty.com',
+        https: true,
         proxy: {
             '/api': {
                 target: 'http://192.168.22.37:8024',

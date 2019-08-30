@@ -1,19 +1,30 @@
-class ZRequest {
-    constructor(url, request) {
-        console.log(request);
-        return fetch(url, request).then(response => {
-            if (response.ok) {
+
+const createRequest = (type = 'get') => {
+    const factory = async (url, options) => {
+        try {
+            const response = await fetch(url, Object.assign({ method: type }, options));
+            console.log(response.headers.get('Content-Type'));
+            if (response.ok && response.status === 200) {
                 return response.json();
             }
             throw new Error(response.status);
-        }).catch(err => {
+        }
+        catch (err) {
             throw new Error(err);
-        });
+        } finally {
+            console.log('finally');
+        };
     }
+
+    return factory;
 }
 
-function Request(url, request) {
-    return new ZRequest(url, request);
+
+class ZRequest {
+    constructor(url, options) {
+    }
+    static get = createRequest('get');
+    static post = createRequest('post');
 }
 
-export default Request;
+export default ZRequest;

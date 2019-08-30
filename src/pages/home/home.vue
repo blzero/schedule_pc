@@ -1,15 +1,23 @@
 <template>
-    <section class="mian">
+    <div class="home">
         homemeie
-    </section>
+    </div>
 </template>
 
 <script>
 export default {
-    name: 'name'
-}
+    name: "home",
+    data() {
+        return {};
+    },
+    mounted() {
+    }
+};
 </script>
 
 <style lang="stylus" scoped>
-
+.home {
+    width: 100%;
+    height: 100%;
+}
 </style>

@@ -1,28 +1,31 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import scheduleManagement from './scheduleManagement';
+import menuData from '@/components/menu/menu.js';
 
 Vue.use(VueRouter);
 
-
-
-const routers = [
+let routes = [
     {
         path: '/',
         name: 'app',
-        component: () => import(/* webpackChunkName: "home" */ '@/App.vue')
+        redirect: {name: 'home'},
     },
     {
-        path: "*",
-        name: "Not Found"
-    }
+        path: '/home',
+        name: 'home',
+        component: () => import(/* webpackChunkName: "home" */ '@/pages/home/home.vue')
+    },
 ];
 
-routers.concat(scheduleManagement);
+routes = routes.concat(menuData);
 
+routes.push({
+    path: "*",
+    name: "Not Found"
+});
 const router = new VueRouter({
-  routers
+    routes
 });
 
 export default router;
