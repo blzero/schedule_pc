@@ -1,15 +1,16 @@
+import errorNotification from './errorNotification'
 
+import responseHandle from './responseHandle'
 const createRequest = (type = 'get') => {
-    const factory = async (url, options) => {
+    const factory = async(url, options) => {
         try {
             const response = await fetch(url, Object.assign({ method: type }, options));
             console.log(response.headers.get('Content-Type'));
-            if (response.ok && response.status === 200) {
-                return response.json();
-            }
-            throw new Error(response.status);
-        }
-        catch (err) {
+            return responseHandle(response)
+        } catch (err) {
+            errorNotification({
+                msg: err.text
+            });
             throw new Error(err);
         } finally {
             console.log('finally');
@@ -21,8 +22,7 @@ const createRequest = (type = 'get') => {
 
 
 class ZRequest {
-    constructor(url, options) {
-    }
+    constructor(url, options) {}
     static get = createRequest('get');
     static post = createRequest('post');
 }

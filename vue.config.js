@@ -1,17 +1,17 @@
 module.exports = {
     devServer: {
-        host: 'schedule.dev.51eparty.com',
+        host: process.env.VUE_APP_HOST,
         https: true,
         proxy: {
             '/api': {
-                target: 'http://192.168.22.37:8024',
+                target: process.env.VUE_APP_ENDPOINT,
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': '',
                 },
             },
             '/mdm': {
-                target: 'http://192.168.22.37:9250', // mdm
+                target: process.env.VUE_APP_MDM_ENDPOINT, // mdm
                 changeOrigin: true,
                 pathRewrite: {
                     '^/mdm': '/mdm',

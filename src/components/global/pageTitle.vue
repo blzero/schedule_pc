@@ -9,13 +9,12 @@ export default {
     name: 'pageTitle',
     data() {
         return {
-            title: ''
+            title: this.$route.meta.title,
         }
     },
     watch: {
         '$route'(route) {
             this.title = route.meta.title;
-            console.log(route);
         }
     }
 }
