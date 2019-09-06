@@ -5,6 +5,7 @@ Vue.use(Vuex)
 import UserInfo from '@/service/userInfo.js'
 
 const store = new Vuex.Store({
+    strict: process.env.NODE_ENV !== 'production',
     state: {
         activeMenu: '',
         routerAnimation: {
@@ -12,7 +13,8 @@ const store = new Vuex.Store({
             mode: 'out-in'
         },
         userInfo: null,
-        isAdmin: null
+        isAdmin: null,
+        userPermission: null,
     },
     getters: {
        
@@ -26,6 +28,9 @@ const store = new Vuex.Store({
         },
         setActiveMenu(state, payload) {
             state.activeMenu = payload;
+        },
+        saveUserPermission(state, payload) {
+            state.userPermission = payload
         }
     },
 
@@ -36,7 +41,13 @@ const store = new Vuex.Store({
         },
         async getUserInfo({dispatch}) {
             let result = await  UserInfo.getUserInfo()
-            dispatch('saveUserInfo', result.data)
+            dispatch('saveUserInfo', result)
+            return Promise.resolve(result)
+        },
+        async getUserPermission({commit}) {
+            let result = await UserInfo.getUserPermission()
+            commit('saveUserPermission', result);
+            return Promise.resolve(result)
         }
     }
 })

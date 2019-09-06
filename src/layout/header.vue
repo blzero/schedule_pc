@@ -32,6 +32,8 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import UserInfo from '@/service/userInfo.js'
+import docCookies from '@/tools/docCookie.js'
 export default {
     name: "zHeader",
     data() {
@@ -42,6 +44,9 @@ export default {
     methods: {
         logout() {
             console.log("logout");
+            UserInfo.logout().then((result) => {
+                location.href = '//' + docCookies.getItem('nowMdmLocationSave')
+            })
         },
         goHome() {
             this.$router.replace({path: '/'});
@@ -82,6 +87,7 @@ color = #fff;
 
         .go-home {
             cursor pointer;
+            font-size 14px;
         }
 
         .user-name {

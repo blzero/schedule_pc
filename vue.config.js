@@ -1,7 +1,7 @@
 module.exports = {
     devServer: {
         host: process.env.VUE_APP_HOST,
-        https: true,
+        // https: true,
         proxy: {
             '/api': {
                 target: process.env.VUE_APP_ENDPOINT,

@@ -257,7 +257,7 @@
                 "isReferenced": null,
                 "hasPermission": true,
                 "permissionCode": "SCHCD_MATRIX_CONFIGURATION",
-                "path": "store-setting",
+                "path": "storeSetting",
                 "children": [],
                 meta: {
                     title: '门店矩阵设置'
@@ -271,7 +271,7 @@
                 "isReferenced": null,
                 "hasPermission": true,
                 "permissionCode": "SCHCD_MATRIX_TEMPLATE",
-                "path": "template-setting",
+                "path": "templateSetting",
                 "children": [],
                 meta: {
                     title: '矩阵模板设置'

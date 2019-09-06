@@ -1,5 +1,6 @@
 import errorNotification from './errorNotification'
 const responseHandle = (response) => {
+    console.log(response.headers.get('Content-Type'));
     if (response.ok && response.status === 200) {
         let type = response.headers.get('Content-Type');
         let result = null;
@@ -11,17 +12,20 @@ const responseHandle = (response) => {
                 result = response.json();
         }
         return result.then(data => {
-            if (data.code === 's200') {
-                return data;
+            if (data.code === '0' || data.code === 'S200') {
+                return data.data;
             }
             return Promise.reject(data)
         }).catch(err => {
-            console.error(err)
             errorNotification({
                 code: err.code
             });
-            throw new Error(JSON.stringify(err));
         })
+    } else {
+        errorNotification({
+            code: response.status,
+            msg: response.statusText
+        });
     }
 }
 

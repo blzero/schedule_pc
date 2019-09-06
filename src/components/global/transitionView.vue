@@ -1,11 +1,7 @@
 <template>
-    <transition-group :name="routerAnimation.name" appear :mode="routerAnimation.mode">
-       <p class="route-title" key="route-title">
-            <slot></slot>
-       </p>
-        <router-view key="main">
-        </router-view>
-    </transition-group>
+    <transition :name="routerAnimation.name" appear :mode="routerAnimation.mode">
+        <slot></slot>
+    </transition>
 </template>
 
 <script>

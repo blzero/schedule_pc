@@ -8,7 +8,10 @@
                 </el-aside>
                 <el-container>
                     <el-main>
-                        <transition-view></transition-view>
+                        <transition-view>
+                            <router-view>
+                            </router-view>
+                        </transition-view>
                     </el-main>
                 </el-container>
             </el-container>
@@ -33,13 +36,14 @@ export default {
         this.userTimer = setInterval(() => {
            this.getUserInfo(); 
         }, 1000 * 60 * 15);
+        this.getUserPermission();
     },
     components: {
         zHeader,
         siderBar
     },
     methods: {
-        ...mapActions(['getUserInfo'])
+        ...mapActions(['getUserInfo', 'getUserPermission'])
     }
 };
 </script>

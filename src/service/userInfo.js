@@ -1,11 +1,18 @@
-import request from '@/request/index.js';
+import request from '@/request/request.js';
 
 class UserInfo {
-    static getUserInfo(options = {}) {
+    getUserInfo(options = {}) {
         return request.get('/mdm/auth_user', options);
+    }
+    getUserPermission() {
+        return request.get('/user/permission')
+    }
+    logout(options = {}) {
+        return request.post('/logout', options)
     }
 }
 
+const userInfo = new UserInfo()
 
 
-export default UserInfo;
+export default userInfo

@@ -57,23 +57,15 @@ export default {
                     if (item.name === routeName) {
                         path += i;
                         this.setActiveMenu(path.split('').join('-'));
-                        break;
+                        return;
                     };
-                    if (item.children) {
-                        next.push({
-                            index: i,
-                            children: item.children
-                        });
+                    if (item.children.length > 0) {
+                        path += i;
+                        searchMenu(item.children);
+                    } else {
                     }
                 }
-
-                if (next.length > 0) {
-                    next.forEach(item => {
-                        path = '';
-                        path += item.index;
-                        searchMenu(item.children);
-                    });
-                }
+                path = ''
                 return null;
             }
            searchMenu(menuData);
